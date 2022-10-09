@@ -21,11 +21,12 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - run: npm test
+    - run: docker-compose -f docker-compose-build.yaml build --parallel
+    - run: docker tag udagram-frontend:local naanahmed/udagram-frontend:v1
+    - run: docker tag udagram-api-user naanahmed/udagram-api-user:v1
+    - run: docker tag udagram-api-feed naanahmed/udagram-api-feed:v1
+    - run: docker tag udagram-reverseproxy naanahmed/udagram-reverseproxy:v1
+    - run: docker push naanahmed/udagram-frontend:v1
+    - run: docker push naanahmed/udagram-api-user:v1
+    - run: docker push naanahmed/udagram-api-feed:v1
+    - run: docker push naanahmed/udagram-reverseproxy:v1
