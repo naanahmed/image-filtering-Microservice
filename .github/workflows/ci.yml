@@ -11,7 +11,9 @@ on:
 
 jobs:
   build:
+
     runs-on: ubuntu-latest
+
     strategy:
       matrix:
         node-version: [14.x, 16.x, 18.x]
@@ -19,10 +21,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    -with:
+    - with:
           node-version: 16.17.1
-          cache: npm
-          cache-dependency-path: ./udagram-api-feed/package-lock.json
+          cache: "npm"
+          cache-dependency-path: "./udagram-api-feed/package-lock.json"
+          cache-dependency-path: "./udagram-api-feed/package-lock.json"
     - run: docker-compose -f docker-compose-build.yaml build --parallel
     - run: docker tag udagram-frontend:local naanahmed/udagram-frontend:v1
     - run: docker tag udagram-api-user naanahmed/udagram-api-user:v1
