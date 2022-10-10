@@ -34,7 +34,7 @@ spec:
 
       - name: frontend
 
-        image: naanahmed/udagram-frontend:v2
+        image: naanahmed/udagram-frontend:v3
 
         ports:
 
